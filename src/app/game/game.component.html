@@ -1,0 +1,18 @@
+<div class="game-container">
+  <div class="board" (click)="handleNextStep($event)">
+    <div class="row" *ngFor="let row of board; let rowIndex = index;" >
+      <div 
+        class="cell" 
+        *ngFor="let cell of row; let colIndex = index; trackBy: trackByCell"
+        [style.color]="cell === 'X' ? 'red' : 'black'" 
+        [attr.data-row]="rowIndex"
+        [attr.data-col]="colIndex"
+      >
+        {{ cell }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="status" class="status">
+    {{ status }}
+  </div>
+</div>
