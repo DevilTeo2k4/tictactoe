@@ -9,7 +9,6 @@ export class GameComponent {
   board: string[][];
   step: number;
   winner: string | null;
-  count: number;
   status: string;
   rows: number;
   cols: number;
@@ -23,16 +22,14 @@ export class GameComponent {
 
     this.step = 0;
     this.winner = null;
-    this.count = 0;
     this.status = "";
     this.rows = this.board.length;
     this.cols = this.board[0].length;
   }
 
   handleNextStep(e: MouseEvent) {
-    const isFullBoard = this.count === this.cols * this.rows;
-    if(this.winner || isFullBoard) return;
-
+    if(this.winner || this.step === this.cols * this.rows) return;
+    
     const target = e.target as HTMLElement;
     if (!target.classList.contains('cell')) return;
 
@@ -40,11 +37,8 @@ export class GameComponent {
     const col = +target.getAttribute('data-col')!;
     
     if(this.board[row][col]) return;
-    
     const player = ++this.step % 2 == 0 ? 'X' : 'O';
     this.board[row][col] = player;
-    this.count++;
-    console.log(this.count)
 
     const win = this.checkWin(player, row, col);
     if(win) {
@@ -56,10 +50,11 @@ export class GameComponent {
       row,
       win
     });
+    console.log(this.step);
 
     console.log(this.board.length);
 
-    if (isFullBoard) {
+    if (this.step === this.cols * this.rows) {
       this.status = `It's a draw!`;
     }
   }
@@ -101,6 +96,17 @@ export class GameComponent {
         return true;
       }
       return false;
+  }
+
+  resetGame() {
+    this.board = [
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ];
+    this.step = 0;
+    this.winner = null;
+    this.status = '';
   }
 
   printBoard(): void {
