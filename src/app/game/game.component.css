@@ -50,3 +50,15 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
+
+.btn {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #4a90e2;
+  font-size: 18px;
+  outline: none;
+  color: #fff;
+}
