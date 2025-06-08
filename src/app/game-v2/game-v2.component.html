@@ -1,0 +1,18 @@
+<div class="game-container">
+  <div class="board" #boardRef (click)="handleNextStep($event)">
+    <div 
+      class="cell"
+      *ngFor="let cell of board; let idx = index; trackBy: trackByValue" 
+      [attr.data-idx]="idx"
+      [style.color]="cell > 0 ? 'red' : 'blue'" 
+    >
+      <span [class.warn-player]="isWarnPlayer(cell)">
+        {{ cell > 0 ? 'X' : (cell < 0 ? 'O' : '') }}
+      </span>
+    </div>
+  </div>
+    <div *ngIf="winner" class="status">
+    {{ winner + " is winner" }}
+  </div>
+  <button (click)="resetGame()" class="btn">Reset Game</button>
+</div>
