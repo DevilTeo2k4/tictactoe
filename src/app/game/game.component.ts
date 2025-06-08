@@ -90,7 +90,7 @@ export class GameComponent {
         return true;
       }
 
-      if (isAntiDiagonal && this.allEqual(player, 0, 2, 1, -1, length)) {
+      if (isAntiDiagonal && this.allEqual(player, 0, this.cols - 1, 1, -1, length)) {
         console.log('4');
         this.printBoard();
         return true;
